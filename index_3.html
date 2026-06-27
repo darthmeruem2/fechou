@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fechou · sua loja ao vivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --verde:#10A85E; --verde-acao:#0A7C45; --verde-vivo:#27D67E;
+  --floresta:#07271A; --floresta-2:#0E3D27;
+  --creme:#F4F8F3; --branco:#FFFFFF;
+  --tinta:#0E1A14; --cinza:#5C6C62; --cinza-claro:#90A096;
+  --linha:#E6EDE7;
+  --ambar:#F2A93B; --ambar-bg:#FCF1DF; --ambar-tinta:#94640F;
+  --coral:#EC5B43; --coral-bg:#FCE9E5; --coral-tinta:#B23A28;
+  --azul:#3B82C4; --azul-bg:#E8F1FA; --azul-tinta:#2A5E8F;
+  --verde-bg:#E2F5EA;
+  --sombra:0 4px 18px rgba(7,39,26,.07),0 1px 3px rgba(7,39,26,.05);
+  --sombra-md:0 12px 34px rgba(7,39,26,.12);
+  --sombra-lg:0 24px 60px rgba(7,39,26,.18);
+  --r:20px; --r-sm:14px;
+  font-family:'Hanken Grotesk',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--creme);color:var(--tinta);-webkit-font-smoothing:antialiased;line-height:1.5}
+.display{font-family:'Bricolage Grotesque',sans-serif}
+.dot{color:var(--verde)}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,select{font-family:inherit}
+.hide{display:none!important}
+
+.view{display:none}
+.view.on{display:block}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;border-radius:13px;transition:transform .12s ease,box-shadow .2s ease,background .2s ease;font-size:15px}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.6;cursor:default}
+.btn-pri{background:linear-gradient(135deg,#13bd6c,#0a7c45);color:#fff;padding:13px 22px;box-shadow:0 8px 22px rgba(10,124,69,.32)}
+.btn-pri:hover{box-shadow:0 12px 28px rgba(10,124,69,.42)}
+.btn-esc{background:var(--floresta);color:#fff;padding:13px 22px}
+.btn-esc:hover{background:#0c3a25}
+.btn-ghost{background:var(--branco);color:var(--tinta);padding:13px 22px;border:1.5px solid var(--linha)}
+.btn-ghost:hover{border-color:var(--cinza-claro)}
+.btn-sm{padding:9px 15px;font-size:14px;border-radius:11px}
+
+.spin{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite;display:inline-block}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* boot loader */
+#boot{position:fixed;inset:0;z-index:500;background:var(--creme);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+#boot .lg{font-family:'Bricolage Grotesque';font-weight:800;font-size:34px}
+#boot .sp{width:32px;height:32px;border:3px solid rgba(13,31,23,.14);border-top-color:var(--verde);border-radius:50%;animation:rot .7s linear infinite}
+
+/* ================= LANDING ================= */
+.lp-nav{position:sticky;top:0;z-index:50;background:rgba(244,248,243,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--linha)}
+.lp-nav-in{max-width:1200px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.lp-logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:24px;letter-spacing:-.02em}
+.lp-links{display:flex;gap:30px;align-items:center}
+.lp-links a{font-weight:600;font-size:15px;color:var(--cinza);transition:color .15s}
+.lp-links a:hover{color:var(--tinta)}
+.lp-nav-cta{display:flex;gap:12px;align-items:center}
+.link-entrar{font-weight:600;font-size:15px;color:var(--tinta);padding:10px 6px}
+.lp-hero{max-width:1200px;margin:0 auto;padding:74px 32px 60px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.lp-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--verde-bg);color:var(--verde-acao);font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;margin-bottom:22px}
+.lp-eyebrow .pinga{width:8px;height:8px;border-radius:50%;background:var(--verde);animation:pulse2 1.8s infinite}
+@keyframes pulse2{0%{box-shadow:0 0 0 0 rgba(16,168,94,.5)}70%{box-shadow:0 0 0 8px rgba(16,168,94,0)}100%{box-shadow:0 0 0 0 rgba(16,168,94,0)}}
+.lp-h1{font-family:'Bricolage Grotesque';font-weight:800;font-size:60px;line-height:1.02;letter-spacing:-.035em}
+.lp-sub{font-size:19px;color:var(--cinza);margin:22px 0 30px;max-width:520px;line-height:1.55}
+.lp-sub b{color:var(--tinta);font-weight:600}
+.lp-hero-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.lp-trust{margin-top:24px;font-size:14px;color:var(--cinza);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lp-trust b{color:var(--verde-acao);font-weight:700}
+.hero-vis{position:relative}
+.hero-card{background:var(--floresta);border-radius:24px;padding:22px;color:#eafff2;box-shadow:var(--sombra-lg);position:relative;overflow:hidden}
+.hero-card::after{content:"";position:absolute;right:-50px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(39,214,126,.28),transparent 70%)}
+.hc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;position:relative}
+.hc-live{display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque';font-weight:700;font-size:13px;letter-spacing:.06em}
+.hc-live .d{width:9px;height:9px;border-radius:50%;background:var(--coral);animation:pulse3 1.8s infinite}
+@keyframes pulse3{0%{box-shadow:0 0 0 0 rgba(236,91,67,.55)}70%{box-shadow:0 0 0 8px rgba(236,91,67,0)}100%{box-shadow:0 0 0 0 rgba(236,91,67,0)}}
+.hc-tempo{font-size:13px;color:#8fc6a9;font-weight:600}
+.hc-placar{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px;position:relative}
+.hc-placar .big{font-family:'Bricolage Grotesque';font-weight:800;font-size:38px;letter-spacing:-.03em;line-height:1}
+.hc-placar .big small{font-size:20px;opacity:.6}
+.hc-placar .rot{font-size:12px;color:#8fc6a9;font-weight:600;margin-top:4px}
+.hc-placar .resn{font-family:'Bricolage Grotesque';font-weight:700;font-size:24px;text-align:right;line-height:1}
+.hc-placar .resl{font-size:11px;color:#8fc6a9;font-weight:600;text-align:right;margin-top:3px}
+#hero-feed{display:flex;flex-direction:column;gap:9px;position:relative;min-height:180px}
+.hres{background:var(--floresta-2);border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:11px 12px;display:flex;align-items:center;gap:11px;animation:entra .42s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes entra{from{opacity:0;transform:translateY(-12px) scale(.97)}to{opacity:1;transform:none}}
+.hres .av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';font-weight:700;font-size:14px;color:#fff;flex:0 0 auto}
+.hres .ri{flex:1;min-width:0}
+.hres .rq{font-size:13.5px;font-weight:600;color:#fff}
+.hres .rq b{color:var(--verde-vivo)}
+.hres .rp{font-size:12px;color:#9fd0b6;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hres .tag{background:var(--verde);color:#062013;font-weight:700;font-size:11.5px;padding:5px 10px;border-radius:8px;flex:0 0 auto}
+.float-pix{position:absolute;bottom:-18px;left:-24px;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:var(--sombra-md);display:flex;align-items:center;gap:11px}
+.float-pix .ck{width:34px;height:34px;border-radius:50%;background:var(--verde-bg);color:var(--verde-acao);display:flex;align-items:center;justify-content:center}
+.float-pix .ft{font-size:12px;color:var(--cinza);font-weight:500}
+.float-pix .fv{font-family:'Bricolage Grotesque';font-weight:700;font-size:15px}
+.lp-sec{max-width:1200px;margin:0 auto;padding:80px 32px}
+.lp-sec-head{text-align:center;max-width:680px;margin:0 auto 52px}
+.lp-kicker{font-weight:700;font-size:14px;color:var(--verde-acao);letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}
+.lp-h2{font-family:'Bricolage Grotesque';font-weight:700;font-size:40px;letter-spacing:-.025em;line-height:1.08}
+.lp-h2-sub{font-size:18px;color:var(--cinza);margin-top:16px}
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.passo{background:var(--branco);border:1px solid var(--linha);border-radius:var(--r);padding:30px 26px;box-shadow:var(--sombra)}
+.passo .num{font-family:'Bricolage Grotesque';font-weight:800;font-size:18px;width:42px;height:42px;border-radius:12px;background:var(--floresta);color:#eafff2;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.passo h3{font-family:'Bricolage Grotesque';font-weight:700;font-size:21px;letter-spacing:-.01em;margin-bottom:9px}
+.passo p{color:var(--cinza);font-size:15.5px;line-height:1.55}
+.passo .codo{color:var(--verde-acao);font-weight:700;background:var(--verde-bg);padding:1px 7px;border-radius:6px}
+.recursos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.rec{background:var(--branco);border:1px solid var(--linha);border-radius:var(--r-sm);padding:24px;box-shadow:var(--sombra)}
+.rec .ric{width:46px;height:46px;border-radius:13px;background:var(--verde-bg);color:var(--verde-acao);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.rec h4{font-family:'Bricolage Grotesque';font-weight:700;font-size:17px;margin-bottom:6px}
+.rec p{color:var(--cinza);font-size:14.5px;line-height:1.5}
+.planos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plano{background:var(--branco);border:1.5px solid var(--linha);border-radius:22px;padding:32px 26px;display:flex;flex-direction:column;box-shadow:var(--sombra);position:relative}
+.plano-destaque{border-color:var(--verde);box-shadow:0 18px 46px rgba(10,124,69,.18);background:linear-gradient(180deg,#fff,#f6fbf7)}
+.plano-tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#13bd6c,#0a7c45);color:#fff;font-weight:700;font-size:12.5px;padding:6px 16px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 16px rgba(10,124,69,.3)}
+.plano-tag-soon{background:var(--ambar-bg);color:var(--ambar-tinta);box-shadow:none}
+.plano-nome{font-family:'Bricolage Grotesque';font-weight:700;font-size:21px;letter-spacing:-.01em}
+.plano-preco{font-family:'Bricolage Grotesque';font-weight:800;font-size:42px;letter-spacing:-.03em;margin:10px 0 2px;line-height:1}
+.plano-preco span{font-size:16px;color:var(--cinza);font-weight:600}
+.plano-desc{color:var(--cinza);font-size:14.5px;margin:8px 0 20px;padding-bottom:20px;border-bottom:1px solid var(--linha)}
+.plano-li{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;margin-bottom:11px;line-height:1.4}
+.plano-li .ck{width:20px;height:20px;border-radius:50%;background:var(--verde-bg);color:var(--verde-acao);display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:1px}
+.plano-li.mais{font-weight:700;color:var(--tinta);margin:6px 0 11px}
+.plano-btn{width:100%;justify-content:center;margin-top:auto;padding:14px}
+.quem{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.quem-chip{background:var(--branco);border:1.5px solid var(--linha);border-radius:999px;padding:13px 24px;font-weight:600;font-size:16px;box-shadow:var(--sombra)}
+.lp-cta-final{text-align:center;padding:30px 32px 96px}
+.lp-cta-final h2{font-family:'Bricolage Grotesque';font-weight:800;font-size:46px;letter-spacing:-.03em;max-width:680px;margin:0 auto 28px;line-height:1.05}
+.lp-foot{border-top:1px solid var(--linha);padding:38px 32px;text-align:center;color:var(--cinza);font-size:14px}
+.lp-foot .fl{font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:var(--tinta);margin-bottom:6px}
+
+/* ================= AUTH ================= */
+.au-wrap{display:grid;grid-template-columns:46% 54%;min-height:100vh}
+.au-brand{background:var(--floresta);color:#eafff2;padding:56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.au-brand::after{content:"";position:absolute;right:-100px;bottom:-100px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(39,214,126,.16),transparent 70%)}
+.au-brand .logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:26px}
+.au-brand .frase{font-family:'Bricolage Grotesque';font-weight:700;font-size:38px;letter-spacing:-.025em;line-height:1.1;position:relative;max-width:440px}
+.au-brand .frase b{color:var(--verde-vivo)}
+.au-mini-feed{position:relative;margin-top:28px;display:flex;flex-direction:column;gap:10px;max-width:380px}
+.au-brand .rod{font-size:14px;color:#8fc6a9;position:relative}
+.au-form-wrap{display:flex;align-items:center;justify-content:center;padding:48px}
+.au-form{width:100%;max-width:400px}
+.au-back{font-size:14px;color:var(--cinza);font-weight:600;display:inline-flex;align-items:center;gap:7px;margin-bottom:38px;cursor:pointer}
+.au-back:hover{color:var(--tinta)}
+.au-tabs{display:flex;background:var(--creme);border-radius:13px;padding:5px;margin-bottom:26px;border:1px solid var(--linha)}
+.au-tab{flex:1;padding:11px;border-radius:9px;font-weight:600;font-size:15px;color:var(--cinza);transition:all .18s}
+.au-tab.on{background:var(--branco);color:var(--tinta);box-shadow:var(--sombra)}
+.au-form h1{font-family:'Bricolage Grotesque';font-weight:700;font-size:28px;letter-spacing:-.02em;margin-bottom:6px}
+.au-form .p{color:var(--cinza);font-size:15px;margin-bottom:28px}
+.campo{margin-bottom:18px}
+.campo label{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
+.campo input{width:100%;padding:14px 16px;border:1.5px solid var(--linha);border-radius:12px;font-size:15px;background:var(--branco);transition:border .18s,box-shadow .18s}
+.campo input:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 4px rgba(16,168,94,.12)}
+.au-form .btn{width:100%;margin-top:8px;padding:15px}
+.au-msg{padding:12px 15px;border-radius:11px;font-size:14px;font-weight:500;margin-bottom:18px;display:none}
+.au-msg.erro{display:block;background:var(--coral-bg);color:var(--coral-tinta)}
+.au-msg.ok{display:block;background:var(--verde-bg);color:var(--verde-acao)}
+.au-foot{text-align:center;font-size:12.5px;color:var(--cinza-claro);margin-top:24px}
+
+/* ================= APP ================= */
+.app-shell{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+.side{background:var(--branco);border-right:1px solid var(--linha);padding:24px 16px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.side-logo{font-family:'Bricolage Grotesque';font-weight:800;font-size:24px;padding:6px 12px 26px}
+.side-nav{display:flex;flex-direction:column;gap:3px;flex:1}
+.snav{display:flex;align-items:center;gap:13px;padding:12px 14px;border-radius:12px;font-weight:600;font-size:15px;color:var(--cinza);transition:all .15s;width:100%;text-align:left}
+.snav svg{width:21px;height:21px;stroke-width:2;flex:0 0 auto}
+.snav:hover{background:var(--creme);color:var(--tinta)}
+.snav.on{background:var(--verde-bg);color:var(--verde-acao)}
+.snav-live{margin-top:8px;background:linear-gradient(135deg,#13bd6c,#0a7c45);color:#fff!important;box-shadow:0 8px 20px rgba(10,124,69,.3)}
+.snav-live:hover{color:#fff}
+.snav-live .pinga{margin-left:auto;width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse2 1.6s infinite}
+.side-perfil{display:flex;align-items:center;gap:11px;padding:12px;border-radius:13px;border:1px solid var(--linha);margin-top:12px}
+.side-perfil .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,#19c06b,#0a7c45);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';font-weight:700;font-size:16px;flex:0 0 auto}
+.side-perfil .info{flex:1;min-width:0}
+.side-perfil .n{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-perfil .a{font-size:12px;color:var(--cinza)}
+.side-perfil .sair{color:var(--cinza-claro);padding:4px}
+.side-perfil .sair:hover{color:var(--coral)}
+.main{overflow-x:hidden}
+.topbar{position:sticky;top:0;z-index:30;background:rgba(244,248,243,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--linha);padding:18px 36px;display:flex;align-items:center;justify-content:space-between}
+.topbar h1{font-family:'Bricolage Grotesque';font-weight:700;font-size:24px;letter-spacing:-.02em}
+.topbar .tb-r{display:flex;align-items:center;gap:14px}
+.main-in{padding:30px 36px 60px;max-width:1180px}
+.sub{display:none}
+.sub.on{display:block}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi{background:var(--branco);border:1px solid var(--linha);border-radius:var(--r-sm);padding:20px;box-shadow:var(--sombra)}
+.kpi .ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.kpi .n{font-family:'Bricolage Grotesque';font-weight:700;font-size:30px;letter-spacing:-.02em;line-height:1}
+.kpi .n small{font-size:18px;opacity:.6;margin-right:2px}
+.kpi .l{font-size:13.5px;color:var(--cinza);font-weight:500;margin-top:6px}
+.kpi .delta{font-size:12.5px;font-weight:700;margin-top:8px;display:inline-flex;align-items:center;gap:4px}
+.delta-up{color:var(--verde-acao)}
+.ic-verde{background:var(--verde-bg);color:var(--verde-acao)}
+.ic-ambar{background:var(--ambar-bg);color:var(--ambar-tinta)}
+.ic-azul{background:var(--azul-bg);color:var(--azul-tinta)}
+.ic-floresta{background:var(--floresta);color:var(--verde-vivo)}
+.grid-2{display:grid;grid-template-columns:1.6fr 1fr;gap:20px}
+.painel{background:var(--branco);border:1px solid var(--linha);border-radius:var(--r);padding:24px;box-shadow:var(--sombra)}
+.painel-cab{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.painel-cab h3{font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;letter-spacing:-.01em}
+.painel-cab .leg{font-size:13px;color:var(--cinza);font-weight:600}
+.chart{display:flex;align-items:flex-end;gap:12px;height:170px;padding-top:10px}
+.bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%;justify-content:flex-end}
+.bar{width:100%;max-width:38px;border-radius:8px 8px 4px 4px;background:linear-gradient(180deg,#27d67e,#0a7c45);transition:height .6s cubic-bezier(.2,.9,.3,1);min-height:4px}
+.bar.hoje{background:linear-gradient(180deg,#27d67e,#13bd6c);box-shadow:0 0 0 3px rgba(39,214,126,.18)}
+.bar-lbl{font-size:12px;color:var(--cinza);font-weight:600}
+.live-card{background:linear-gradient(155deg,var(--floresta),#0a3221);border-radius:var(--r);padding:24px;color:#eafff2;box-shadow:var(--sombra-md);height:100%;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.live-card::after{content:"";position:absolute;right:-40px;top:-50px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(39,214,126,.26),transparent 70%)}
+.live-card .lc-h{font-family:'Bricolage Grotesque';font-weight:700;font-size:19px;letter-spacing:-.01em;position:relative}
+.live-card .lc-p{color:#bfe9d2;font-size:14.5px;margin-top:8px;line-height:1.5;position:relative}
+.live-card .btn{margin-top:auto;width:100%;background:var(--verde);color:#062013;position:relative}
+.live-card .btn:hover{background:var(--verde-vivo)}
+.tabela{width:100%;border-collapse:collapse}
+.tabela th{text-align:left;font-size:12px;font-weight:700;color:var(--cinza-claro);text-transform:uppercase;letter-spacing:.04em;padding:0 14px 12px}
+.tabela td{padding:13px 14px;border-top:1px solid var(--linha);font-size:14.5px;vertical-align:middle}
+.tabela tr:hover td{background:var(--creme)}
+.td-cli{display:flex;align-items:center;gap:11px}
+.td-cli .thumb{width:42px;height:42px;border-radius:10px;object-fit:cover;flex:0 0 auto;background:#e9efea}
+.td-cli .nm{font-weight:600}
+.td-cli .pr{font-size:12.5px;color:var(--cinza)}
+.td-val{font-family:'Bricolage Grotesque';font-weight:700;letter-spacing:-.01em}
+.pill{font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:6px}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%}
+.pill-pend{background:var(--ambar-bg);color:var(--ambar-tinta)}.pill-pend::before{background:var(--ambar)}
+.pill-pago{background:var(--verde-bg);color:var(--verde-acao)}.pill-pago::before{background:var(--verde)}
+.pill-env{background:var(--azul-bg);color:var(--azul-tinta)}.pill-env::before{background:var(--azul)}
+.pill-exp{background:var(--coral-bg);color:var(--coral-tinta)}.pill-exp::before{background:var(--coral)}
+.tbtn{font-weight:600;font-size:13px;padding:8px 14px;border-radius:10px;display:inline-flex;align-items:center;gap:7px;transition:transform .12s;margin-left:6px}
+.tbtn:active{transform:scale(.95)}
+.tbtn-whats{background:var(--verde-acao);color:#fff}
+.tbtn-esc{background:var(--floresta);color:#fff}
+.tbtn-ghost{background:var(--creme);color:var(--tinta);border:1.5px solid var(--linha)}
+.tbtn-x{background:var(--coral-bg);color:var(--coral-tinta);padding:8px 10px}
+.chips{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--linha);background:var(--branco);color:var(--cinza);font-weight:600;font-size:14px;padding:9px 17px;border-radius:999px;transition:all .18s}
+.chip.on{background:var(--floresta);color:#fff;border-color:var(--floresta)}
+.chip:hover:not(.on){border-color:var(--cinza-claro)}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;gap:16px;flex-wrap:wrap}
+.grid-prod{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cprod{background:var(--branco);border:1px solid var(--linha);border-radius:var(--r-sm);overflow:hidden;box-shadow:var(--sombra);transition:transform .15s,box-shadow .15s;cursor:pointer}
+.cprod:hover{transform:translateY(-3px);box-shadow:var(--sombra-md)}
+.cprod .foto{aspect-ratio:1/1;width:100%;object-fit:cover;background:#eef3ee;position:relative;display:block}
+.cod-tag{position:absolute;top:10px;left:10px;background:rgba(7,39,26,.82);color:#eafff2;font-family:'Bricolage Grotesque';font-weight:700;font-size:12px;padding:3px 10px;border-radius:8px}
+.cprod .pb{padding:14px 16px 16px}
+.cprod .pn{font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cprod .pr{font-family:'Bricolage Grotesque';font-weight:700;font-size:19px;letter-spacing:-.01em;margin-top:4px}
+.cprod .est{font-size:13px;color:var(--cinza);margin-top:6px;display:flex;align-items:center;gap:6px}
+.est-zero{color:var(--coral-tinta)}
+.empty{text-align:center;padding:60px 24px;color:var(--cinza)}
+.empty .ei{width:64px;height:64px;border-radius:18px;background:var(--verde-bg);color:var(--verde-acao);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.empty h3{font-family:'Bricolage Grotesque';font-weight:700;font-size:20px;color:var(--tinta);margin-bottom:8px}
+.empty p{font-size:15px;margin-bottom:20px;max-width:340px;margin-left:auto;margin-right:auto}
+.conta-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.perfil-card{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+.perfil-card .avg{width:72px;height:72px;border-radius:50%;background:linear-gradient(140deg,#19c06b,#0a7c45);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';font-weight:700;font-size:30px;flex:0 0 auto}
+.perfil-card .pn{font-family:'Bricolage Grotesque';font-weight:700;font-size:22px;letter-spacing:-.01em}
+.perfil-card .at{color:var(--cinza);font-size:14px;margin-top:2px}
+.vitrine-box{background:linear-gradient(155deg,var(--floresta),#0a3221);border-radius:var(--r);padding:22px;color:#eafff2;box-shadow:var(--sombra-md)}
+.vitrine-box .vl{font-size:13px;color:#9fd9ba;font-weight:600}
+.vitrine-box .vu{font-family:'Bricolage Grotesque';font-weight:700;font-size:20px;margin:6px 0 16px;letter-spacing:-.01em;word-break:break-all}
+.vitrine-box .vrow{display:flex;gap:10px}
+.vitrine-box .btn{background:var(--verde);color:#062013}
+.vitrine-box .btn:hover{background:var(--verde-vivo)}
+.vitrine-box .btn-out{background:rgba(255,255,255,.1);color:#fff}
+.form-row{margin-bottom:18px}
+.form-row label{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
+.form-row input{width:100%;padding:13px 15px;border:1.5px solid var(--linha);border-radius:12px;font-size:15px;transition:border .18s,box-shadow .18s}
+.form-row input:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 4px rgba(16,168,94,.12)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:120;background:rgba(7,39,26,.5);display:none;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(3px)}
+.modal.on{display:flex}
+.modal-card{background:var(--branco);border-radius:var(--r);padding:30px;width:100%;max-width:460px;box-shadow:var(--sombra-lg);max-height:92vh;overflow-y:auto}
+.modal-card h2{font-family:'Bricolage Grotesque';font-weight:700;font-size:23px;letter-spacing:-.02em;margin-bottom:22px}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-acoes{display:flex;gap:12px;margin-top:24px}
+.modal-acoes .btn{flex:1}
+.modal-del{margin-top:14px;text-align:center}
+.modal-del button{color:var(--coral-tinta);font-weight:600;font-size:14px;padding:8px}
+
+/* ===== COCKPIT ===== */
+.cockpit{position:fixed;inset:0;z-index:100;background:var(--floresta);color:#eafff2;display:none;flex-direction:column;padding:28px 36px}
+.cockpit.on{display:flex}
+.ck-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.08)}
+.ck-badge{display:flex;align-items:center;gap:11px}
+.ck-badge .d{width:12px;height:12px;border-radius:50%;background:var(--coral);animation:pulse3 1.8s infinite}
+.ck-badge .lb{font-family:'Bricolage Grotesque';font-weight:700;font-size:16px;letter-spacing:.07em}
+.ck-badge .tempo{font-size:15px;color:#8fc6a9;font-weight:600;font-variant-numeric:tabular-nums}
+.ck-fim{background:rgba(255,255,255,.1);color:#fff;font-weight:600;font-size:14px;padding:11px 20px;border-radius:12px}
+.ck-fim:hover{background:rgba(255,255,255,.18)}
+.ck-body{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-top:28px;min-height:0}
+.ck-palco{display:flex;flex-direction:column;gap:20px;min-height:0}
+.ck-reserva-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:24px}
+.ck-reserva-card h3{font-family:'Bricolage Grotesque';font-weight:700;font-size:19px;margin-bottom:18px}
+.ck-reserva-card label{display:block;font-size:13px;font-weight:600;color:#9fd0b6;margin-bottom:8px}
+.ck-reserva-card select,.ck-reserva-card input{width:100%;padding:13px 15px;border-radius:12px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-size:15px;margin-bottom:16px}
+.ck-reserva-card select option{color:#0e1a14}
+.ck-reserva-card select:focus,.ck-reserva-card input:focus{outline:none;border-color:var(--verde-vivo)}
+.ck-reserva-card input::placeholder{color:#6fae8d}
+.ck-reserva-card .btn{width:100%;background:var(--verde);color:#062013}
+.ck-reserva-card .btn:hover{background:var(--verde-vivo)}
+.ck-placar{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ck-stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px 20px}
+.ck-stat .v{font-family:'Bricolage Grotesque';font-weight:800;font-size:34px;letter-spacing:-.03em;line-height:1}
+.ck-stat .v small{font-size:18px;opacity:.6}
+.ck-stat .l{font-size:13px;color:#8fc6a9;font-weight:600;margin-top:6px}
+.ck-feed-wrap{display:flex;flex-direction:column;min-height:0}
+.ck-feed-cab{font-size:13px;font-weight:700;letter-spacing:.07em;color:#6fae8d;text-transform:uppercase;margin-bottom:16px;flex:0 0 auto}
+.ck-feed{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:11px;padding-right:6px}
+.ck-feed::-webkit-scrollbar{width:6px}.ck-feed::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px}
+.ck-empty{color:#6fae8d;text-align:center;padding:50px 20px;font-size:14.5px}
+.ckres{background:var(--floresta-2);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:15px 16px;display:flex;align-items:center;gap:13px;animation:entra .42s cubic-bezier(.2,.9,.3,1.2)}
+.ckres .av{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';font-weight:700;font-size:17px;color:#fff;flex:0 0 auto}
+.ckres .ri{flex:1;min-width:0}
+.ckres .rq{font-size:15.5px;font-weight:600;color:#fff}
+.ckres .rq b{color:var(--verde-vivo)}
+.ckres .rp{font-size:13px;color:#9fd0b6;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ck-acts{display:flex;gap:8px;flex:0 0 auto}
+.ck-cobrar,.ck-pago{font-weight:700;font-size:13px;padding:11px 15px;border-radius:12px;display:flex;align-items:center;gap:6px;transition:transform .12s,background .2s}
+.ck-cobrar{background:var(--verde);color:#062013}
+.ck-pago{background:rgba(255,255,255,.1);color:#fff}
+.ck-cobrar:active,.ck-pago:active{transform:scale(.94)}
+.ckres.paga{border-color:rgba(39,214,126,.35);box-shadow:0 0 0 1px rgba(39,214,126,.22);opacity:.85}
+.ckres.paga .ck-pago{background:rgba(39,214,126,.16);color:var(--verde-vivo)}
+
+.toast{position:fixed;left:50%;bottom:36px;transform:translateX(-50%) translateY(20px);background:var(--floresta);color:#eafff2;font-weight:600;font-size:14.5px;padding:14px 22px;border-radius:14px;display:flex;align-items:center;gap:10px;box-shadow:var(--sombra-lg);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.2,.9,.3,1.2);z-index:200;max-width:90vw}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.toast .ck{color:var(--verde-vivo);flex:0 0 auto}
+.toast.err{background:#5a1f16}.toast.err .ck{color:#ff9b87}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+@media (max-width:1080px){
+  .lp-hero,.ck-body{grid-template-columns:1fr}
+  .passos,.recursos,.grid-prod,.planos{grid-template-columns:repeat(2,1fr)}
+  .planos .plano-destaque{grid-column:1 / -1}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .grid-2,.conta-grid{grid-template-columns:1fr}
+  .au-wrap{grid-template-columns:1fr}.au-brand{display:none}
+  .app-shell{grid-template-columns:1fr}.side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}
+  .side-nav{flex-direction:row;flex-wrap:wrap;flex:1 1 100%;margin-top:12px}.snav{width:auto}.snav-live{margin-top:0}
+}
+</style>
+</head>
+<body>
+
+<div id="boot"><div class="lg display">fechou<span class="dot">.</span></div><div class="sp"></div></div>
+
+<!-- ===================== LANDING ===================== -->
+<div class="view" id="v-landing">
+  <nav class="lp-nav"><div class="lp-nav-in">
+    <div class="lp-logo display">fechou<span class="dot">.</span></div>
+    <div class="lp-links"><a href="#como">Como funciona</a><a href="#precos">Preços</a><a href="#quem">Pra quem é</a></div>
+    <div class="lp-nav-cta"><a class="link-entrar" onclick="irAuth('entrar')">Entrar</a><button class="btn btn-pri btn-sm" onclick="irAuth('cadastrar')">Começar grátis</button></div>
+  </div></nav>
+  <header class="lp-hero">
+    <div>
+      <span class="lp-eyebrow"><span class="pinga"></span>Live commerce pro Brasil</span>
+      <h1 class="lp-h1 display">Comentou,<br><span class="dot">fechou.</span><br>Pix na conta.</h1>
+      <p class="lp-sub">A cliente comenta <b>EU QUERO</b> na sua live, o Fechou reserva a peça na hora e manda a cobrança no Pix pelo WhatsApp. <b>Você só vende — o resto é no automático.</b></p>
+      <div class="lp-hero-cta">
+        <button class="btn btn-pri" onclick="irAuth('cadastrar')">Começar grátis<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <a class="btn btn-ghost" href="#como">Ver como funciona</a>
+      </div>
+      <div class="lp-trust"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--verde-acao)" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg><b>Sem mensalidade</b>&nbsp;·&nbsp;sem cartão&nbsp;·&nbsp;você só paga quando vende</div>
+    </div>
+    <div class="hero-vis">
+      <div class="hero-card">
+        <div class="hc-top"><div class="hc-live"><span class="d"></span>AO VIVO</div><div class="hc-tempo" id="lp-cron">23:14</div></div>
+        <div class="hc-placar"><div><div class="big"><small>R$ </small><span id="lp-valor">1.290</span></div><div class="rot">vendido nessa live</div></div><div><div class="resn" id="lp-res">18</div><div class="resl">reservas</div></div></div>
+        <div id="hero-feed"></div>
+      </div>
+      <div class="float-pix"><div class="ck"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg></div><div><div class="ft">Pix recebido</div><div class="fv">R$ 89,00</div></div></div>
+    </div>
+  </header>
+  <section class="lp-sec" id="como">
+    <div class="lp-sec-head"><div class="lp-kicker">Como funciona</div><h2 class="lp-h2 display">Três passos e a venda fecha sozinha</h2><p class="lp-h2-sub">Você faz a live do jeito que já faz. O Fechou cuida da reserva, da cobrança e do controle.</p></div>
+    <div class="passos">
+      <div class="passo"><div class="num">1</div><h3>Cadastre suas peças</h3><p>Foto, preço e um código curto tipo <span class="codo">P1</span>, <span class="codo">P2</span>. Leva dois minutos e fica salvo.</p></div>
+      <div class="passo"><div class="num">2</div><h3>Faça sua live</h3><p>No Instagram, como sempre. Mostre as peças e fale os códigos enquanto as clientes assistem.</p></div>
+      <div class="passo"><div class="num">3</div><h3>Receba no Pix</h3><p>Comentou <span class="codo">EU QUERO P3</span>, a peça trava no estoque e a cobrança sai no WhatsApp.</p></div>
+    </div>
+  </section>
+  <section class="lp-sec" style="padding-top:0">
+    <div class="lp-sec-head"><div class="lp-kicker">Tudo num lugar só</div><h2 class="lp-h2 display">O que o Fechou faz por você</h2></div>
+    <div class="recursos">
+      <div class="rec"><div class="ric"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/><circle cx="12" cy="12" r="2.5"/></svg></div><h4>Reserva automática</h4><p>Comentou EU QUERO, a peça é reservada pra quem chegou primeiro.</p></div>
+      <div class="rec"><div class="ric"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.2-1.4A10 10 0 1 0 12 2z"/></svg></div><h4>Cobrança no WhatsApp</h4><p>O Pix vai direto pra cliente, sem você digitar nada.</p></div>
+      <div class="rec"><div class="ric"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg></div><h4>Estoque trava sozinho</h4><p>Nunca mais venda a mesma peça pra duas clientes na correria.</p></div>
+      <div class="rec"><div class="ric"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></div><h4>Painel de pedidos</h4><p>Quem pagou, quem falta, o que mandar. Organizado por status.</p></div>
+      <div class="rec"><div class="ric"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20z"/></svg></div><h4>Sua vitrine pra divulgar</h4><p>Um link só seu com as peças, pra mandar fora da live também.</p></div>
+      <div class="rec"><div class="ric"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 7l9 5 9-5-9-5z"/><path d="m3 12 9 5 9-5"/></svg></div><h4>Pix cai direto pra você</h4><p>O dinheiro entra na sua conta na hora. O Fechou não segura nada.</p></div>
+    </div>
+  </section>
+  <section class="lp-sec" id="precos">
+    <div class="lp-sec-head"><div class="lp-kicker">Planos</div><h2 class="lp-h2 display">Comece grátis. Cresça quando quiser.</h2><p class="lp-h2-sub">A taxa por venda é a mesma em todos: <b>2,49% no Pix</b> e <b>2% no cartão</b>. Você só paga quando recebe.</p></div>
+    <div class="planos">
+      <div class="plano">
+        <div class="plano-nome">Grátis</div>
+        <div class="plano-preco">R$ 0 <span>pra sempre</span></div>
+        <div class="plano-desc">Pra fazer sua primeira live hoje.</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Até 7 produtos no catálogo</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Live com EU QUERO + reserva</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Trava de estoque automática</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Pix (2,49%) e cartão (2%)</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Cobrança no WhatsApp</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Vitrine pública</div>
+        <button class="btn btn-ghost plano-btn" onclick="irAuth('cadastrar')">Começar grátis</button>
+      </div>
+      <div class="plano plano-destaque">
+        <div class="plano-tag">Mais escolhido</div>
+        <div class="plano-nome">Pro</div>
+        <div class="plano-preco">R$ 37,90 <span>/mês</span></div>
+        <div class="plano-desc">Pra vender sério, sem limite.</div>
+        <div class="plano-li mais">Tudo do Grátis, e mais:</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Produtos ilimitados</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Pix automático (cobra e confirma sozinho)</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Vitrine sem o selo Fechou</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Relatórios de vendas</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Histórico de clientes + várias fotos por peça</div>
+        <button class="btn btn-pri plano-btn" onclick="irAuth('cadastrar')">Assinar o Pro</button>
+      </div>
+      <div class="plano">
+        <div class="plano-tag plano-tag-soon">Em breve</div>
+        <div class="plano-nome">Premium</div>
+        <div class="plano-preco">R$ 199 <span>/mês</span></div>
+        <div class="plano-desc">Pra quem vive das lives.</div>
+        <div class="plano-li mais">Tudo do Pro, e mais:</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Captura automática do EU QUERO no Insta</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Cartão parcelado no checkout</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Equipe (vários atendentes)</div>
+        <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Lembrete de Pix automático</div>
+        <button class="btn btn-ghost plano-btn" disabled style="opacity:.55">Em breve</button>
+      </div>
+    </div>
+  </section>
+  <section class="lp-sec" id="quem" style="padding-top:0">
+    <div class="lp-sec-head"><div class="lp-kicker">Pra quem é</div><h2 class="lp-h2 display">Feito pra quem vende ao vivo</h2></div>
+    <div class="quem"><div class="quem-chip">Sacoleiras</div><div class="quem-chip">Brechós</div><div class="quem-chip">Semijoias</div><div class="quem-chip">Roupas</div><div class="quem-chip">Confeitarias</div><div class="quem-chip">Cosméticos</div><div class="quem-chip">Artesanato</div></div>
+  </section>
+  <section class="lp-cta-final"><h2 class="display">Bora fechar sua primeira venda ao vivo?</h2><button class="btn btn-pri" onclick="irAuth('cadastrar')">Começar grátis agora<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></section>
+  <footer class="lp-foot"><div class="fl display">fechou<span class="dot">.</span></div>feito pro Brasil que vende ao vivo</footer>
+</div>
+
+<!-- ===================== AUTH ===================== -->
+<div class="view" id="v-auth">
+  <div class="au-wrap">
+    <div class="au-brand">
+      <div class="logo display">fechou<span style="color:var(--verde-vivo)">.</span></div>
+      <div><div class="frase display">Sua live virou <b>caixa registradora.</b></div><div class="au-mini-feed" id="au-feed"></div></div>
+      <div class="rod">Comentou, fechou. Pix na conta.</div>
+    </div>
+    <div class="au-form-wrap"><div class="au-form">
+      <a class="au-back" onclick="voltarSite()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Voltar ao site</a>
+      <div class="au-tabs"><button class="au-tab on" id="tab-entrar" onclick="setModo('entrar')">Entrar</button><button class="au-tab" id="tab-cadastrar" onclick="setModo('cadastrar')">Criar conta</button></div>
+      <h1 class="display" id="au-tit">Bom te ver de volta</h1>
+      <div class="p" id="au-p">Entre pra acessar sua loja.</div>
+      <div class="au-msg" id="au-msg"></div>
+      <div class="campo" id="campo-loja" style="display:none"><label>Nome da sua loja</label><input id="in-loja" type="text" placeholder="Ex.: Lú Modas" maxlength="40"></div>
+      <div class="campo"><label>E-mail</label><input id="in-email" type="email" placeholder="voce@email.com" autocomplete="email"></div>
+      <div class="campo"><label>Senha</label><input id="in-senha" type="password" placeholder="mínimo 6 caracteres" autocomplete="current-password"></div>
+      <button class="btn btn-pri" id="au-btn" onclick="fazerAuth()">Entrar</button>
+      <div class="au-foot">🔒 Seus dados protegidos · cada loja acessa só o que é dela</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div class="view" id="v-app">
+  <div class="app-shell">
+    <aside class="side">
+      <div class="side-logo">fechou<span class="dot">.</span></div>
+      <nav class="side-nav">
+        <button class="snav on" data-sub="inicio" onclick="irApp('inicio')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-7h6v7"/></svg>Início</button>
+        <button class="snav snav-live" onclick="abrirLive()"><svg viewBox="0 0 24 24" fill="none" stroke="#fff"><path d="M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/><circle cx="12" cy="12" r="2.4" fill="#fff" stroke="none"/></svg>Começar live<span class="pinga"></span></button>
+        <button class="snav" data-sub="produtos" onclick="irApp('produtos')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Produtos</button>
+        <button class="snav" data-sub="pedidos" onclick="irApp('pedidos')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6"/></svg>Pedidos</button>
+        <button class="snav" data-sub="conta" onclick="irApp('conta')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Conta</button>
+      </nav>
+      <div class="side-perfil"><div class="av" id="sp-av">L</div><div class="info"><div class="n" id="sp-nome">Loja</div><div class="a" id="sp-slug">@loja</div></div><button class="sair" onclick="sair()" title="Sair"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button></div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <h1 id="app-titulo">Início</h1>
+        <div class="tb-r"><button class="btn btn-pri btn-sm" onclick="abrirLive()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/><circle cx="12" cy="12" r="2.4" fill="#fff" stroke="none"/></svg>Começar live</button></div>
+      </div>
+      <div class="main-in">
+
+        <section class="sub on" id="app-inicio">
+          <div class="kpis">
+            <div class="kpi"><div class="ic ic-verde"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="n" id="kpi-vendido">R$ 0</div><div class="l">vendido hoje</div></div>
+            <div class="kpi"><div class="ic ic-ambar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div class="n" id="kpi-pend">0</div><div class="l">aguardando Pix</div><div class="delta" id="kpi-pend-sub" style="color:var(--ambar-tinta)"></div></div>
+            <div class="kpi"><div class="ic ic-azul"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="13" height="9" rx="1.5"/><path d="M16 11h3l2 3v3h-5"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg></div><div class="n" id="kpi-enviar">0</div><div class="l">pra enviar</div></div>
+            <div class="kpi"><div class="ic ic-floresta"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg></div><div class="n" id="kpi-vendas">0</div><div class="l">vendas fechadas</div></div>
+          </div>
+          <div class="grid-2">
+            <div class="painel">
+              <div class="painel-cab"><h3>Vendas dos últimos 7 dias</h3><span class="leg" id="chart-total"></span></div>
+              <div class="chart" id="chart"></div>
+            </div>
+            <div class="live-card">
+              <div><div class="lc-h">Pronta pra vender ao vivo?</div><div class="lc-p" id="live-card-p">Cadastre suas peças e comece a live. Cada EU QUERO vira pedido aqui.</div></div>
+              <button class="btn" onclick="abrirLive()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#062013" stroke-width="2.2"><path d="M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/><circle cx="12" cy="12" r="2.4" fill="#062013" stroke="none"/></svg>Começar live agora</button>
+            </div>
+          </div>
+          <div class="painel" style="margin-top:20px">
+            <div class="painel-cab"><h3>Últimos pedidos</h3><span class="leg" style="color:var(--verde-acao);cursor:pointer" onclick="irApp('pedidos')">ver todos</span></div>
+            <div id="inicio-pedidos"></div>
+          </div>
+        </section>
+
+        <section class="sub" id="app-produtos">
+          <div class="sec-head">
+            <div class="chips" id="prod-chips"><button class="chip on" data-f="todas">Todas</button><button class="chip" data-f="venda">À venda</button><button class="chip" data-f="esgotadas">Esgotadas</button></div>
+            <button class="btn btn-pri btn-sm" onclick="abrirModalProduto()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M12 5v14M5 12h14"/></svg>Adicionar produto</button>
+          </div>
+          <div id="prod-area"></div>
+        </section>
+
+        <section class="sub" id="app-pedidos">
+          <div class="chips" id="ped-chips"><button class="chip on" data-f="todos">Todos</button><button class="chip" data-f="pendente">Pendente</button><button class="chip" data-f="pago">Pago</button><button class="chip" data-f="enviado">Enviado</button></div>
+          <div id="ped-area"></div>
+        </section>
+
+        <section class="sub" id="app-conta">
+          <div id="ct-plano" style="margin-bottom:20px"></div>
+          <div class="conta-grid">
+            <div><div class="painel">
+              <div class="perfil-card"><div class="avg" id="ct-av">L</div><div><div class="pn display" id="ct-nome">Loja</div><div class="at" id="ct-at">@loja</div></div></div>
+              <div class="form-row"><label>Nome da loja</label><input id="ct-in-nome" maxlength="40"></div>
+              <div class="form-row"><label>Bio curtinha</label><input id="ct-in-bio" maxlength="80" placeholder="Ex.: Moda feminina · novidades toda semana"></div>
+              <button class="btn btn-esc btn-sm" onclick="salvarLoja()">Salvar alterações</button>
+            </div></div>
+            <div>
+              <div class="vitrine-box">
+                <div class="vl">Sua vitrine pra divulgar</div><div class="vu" id="ct-vitrine">fechou.com/...</div>
+                <div class="vrow"><button class="btn btn-sm" onclick="copiarVitrine()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copiar link</button></div>
+              </div>
+              <div class="painel" style="margin-top:20px">
+                <div class="form-row"><label>Chave Pix <span style="color:var(--cinza-claro);font-weight:500">· onde você recebe</span></label><input id="ct-in-pix" maxlength="140" placeholder="cpf, e-mail, celular ou aleatória"></div>
+                <div class="form-row"><label>Nome no Pix</label><input id="ct-in-pixnome" maxlength="60" placeholder="Nome que aparece pra cliente"></div>
+                <div class="form-row"><label>WhatsApp <span style="color:var(--cinza-claro);font-weight:500">· pra cobrar</span></label><input id="ct-in-whats" maxlength="20" placeholder="(11) 99999-9999"></div>
+                <button class="btn btn-esc btn-sm" onclick="salvarPagamento()">Salvar pagamento</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- COCKPIT -->
+  <div class="cockpit" id="cockpit">
+    <div class="ck-top"><div class="ck-badge"><span class="d"></span><span class="lb">AO VIVO</span><span class="tempo" id="ck-cron">0:00</span></div><button class="ck-fim" onclick="fecharLive()">Encerrar live</button></div>
+    <div class="ck-body">
+      <div class="ck-palco">
+        <div class="ck-reserva-card">
+          <h3>Quem pediu agora?</h3>
+          <label>Peça</label>
+          <select id="ck-peca"></select>
+          <label>Nome da cliente</label>
+          <input id="ck-cliente" placeholder="Ex.: Maria Clara" maxlength="60">
+          <button class="btn" onclick="reservar()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#062013" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Reservar</button>
+        </div>
+        <div class="ck-placar">
+          <div class="ck-stat"><div class="v"><small>R$ </small><span id="ck-valor">0</span></div><div class="l">vendido nessa live</div></div>
+          <div class="ck-stat"><div class="v" id="ck-res">0</div><div class="l">reservas feitas</div></div>
+        </div>
+      </div>
+      <div class="ck-feed-wrap"><div class="ck-feed-cab">Reservas dessa live</div><div class="ck-feed" id="ck-feed"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUTO -->
+<div class="modal" id="modal-produto"><div class="modal-card">
+  <h2 id="mp-tit">Novo produto</h2>
+  <div class="form-row"><label>Nome da peça</label><input id="mp-nome" placeholder="Ex.: Vestido floral" maxlength="60"></div>
+  <div class="modal-grid">
+    <div class="form-row"><label>Preço (R$)</label><input id="mp-preco" type="number" inputmode="decimal" placeholder="89,00" step="0.01" min="0"></div>
+    <div class="form-row"><label>Quantidade</label><input id="mp-qtd" type="number" inputmode="numeric" placeholder="1" min="0" value="1"></div>
+  </div>
+  <div class="form-row"><label>Foto (link, opcional)</label><input id="mp-foto" placeholder="cole o link de uma foto"></div>
+  <div class="modal-acoes"><button class="btn btn-ghost" onclick="fecharModalProduto()">Cancelar</button><button class="btn btn-pri" id="mp-salvar" onclick="salvarProduto()">Salvar</button></div>
+  <div class="modal-del" id="mp-del" style="display:none"><button onclick="apagarProduto()">Apagar esta peça</button></div>
+</div></div>
+
+<!-- MODAL SEJA PRO -->
+<div class="modal" id="modal-pro"><div class="modal-card" style="max-width:470px;padding:0;overflow:hidden">
+  <div style="background:linear-gradient(155deg,var(--floresta),#0a3221);color:#eafff2;padding:30px 30px 26px">
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(39,214,126,.16);color:var(--verde-vivo);font-weight:700;font-size:12.5px;padding:6px 13px;border-radius:999px;margin-bottom:16px"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 6.9L22 9l-5.6 4.4L18.4 21 12 16.7 5.6 21l2-7.6L2 9l7.4-.1z"/></svg>FECHOU PRO</div>
+    <div class="display" style="font-weight:800;font-size:29px;letter-spacing:-.02em;line-height:1.1">Venda sem limite.</div>
+    <div style="color:#bfe9d2;font-size:15px;margin-top:8px">Você bateu as 7 peças do grátis. No Pro o catálogo é ilimitado e a cobrança fica no automático.</div>
+  </div>
+  <div style="padding:24px 30px 30px">
+    <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:20px"><span class="display" style="font-weight:800;font-size:38px;letter-spacing:-.03em">R$ 37,90</span><span style="color:var(--cinza);font-weight:600">/mês · cancela quando quiser</span></div>
+    <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Produtos ilimitados</div>
+    <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Pix automático (cobra e confirma sozinho)</div>
+    <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Vitrine sem o selo Fechou</div>
+    <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Relatórios e histórico de clientes</div>
+    <div class="plano-li"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>Várias fotos por peça</div>
+    <div class="modal-acoes" style="margin-top:24px"><button class="btn btn-ghost" onclick="fecharPro()">Agora não</button><button class="btn btn-pri" onclick="assinarPro()">Assinar o Pro</button></div>
+  </div>
+</div></div>
+
+<div class="toast" id="toast"><span class="ck">✓</span><span id="toast-txt">Feito</span></div>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm";
+/* ===== CONFIG ===== */
+var SUPA_URL="https://nmwmxqcomohfbszwztgl.supabase.co";
+var SUPA_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5td214cWNvbW9oZmJzend6dGdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1NjMzNzEsImV4cCI6MjA5NzEzOTM3MX0.3xS50Bj0NktjIA-SpBJp8O8Eg8q-PfcGmZjsuU_yCwc";
+
+/* storage seguro (cai pra memória se localStorage bloquear) */
+function storageSeguro(){
+  try{var t="__fechou_t";localStorage.setItem(t,"1");localStorage.removeItem(t);return window.localStorage;}
+  catch(e){var m={};return{getItem:function(k){return m[k]||null;},setItem:function(k,v){m[k]=String(v);},removeItem:function(k){delete m[k];}};}
+}
+var sb=createClient(SUPA_URL,SUPA_KEY,{auth:{persistSession:true,autoRefreshToken:true,storage:storageSeguro()}});
+
+var $=function(id){return document.getElementById(id);};
+var uid=null, loja=null, pecas=[], pedidos=[];
+
+/* ===== helpers ===== */
+function rs(n){return "R$ "+Number(n).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});}
+function rsk(n){return "R$ "+Number(n).toLocaleString("pt-BR",{maximumFractionDigits:0});}
+var CORES=["#e8745f","#5a8fd6","#c08fd0","#e0a93b","#5fb98a","#d67fa8","#7f9fd0","#e09060","#6fb89a"];
+function corDe(s){s=s||"?";var t=0;for(var i=0;i<s.length;i++)t+=s.charCodeAt(i);return CORES[t%CORES.length];}
+function iniDe(s){s=(s||"").trim();return (s.charAt(0)||"?").toUpperCase();}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function fotoOu(p){
+  if(p.foto_url) return esc(p.foto_url);
+  var c=corDe(p.cod||p.nome||"P"); var c2=corDe((p.nome||"")+"x");
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="'+c+'"/><rect x="30" y="28" width="40" height="44" rx="6" fill="'+c2+'" opacity="0.55"/></svg>';
+  return "data:image/svg+xml,"+encodeURIComponent(svg);
+}
+var tt;
+function toast(msg,erro){var t=$("toast");$("toast-txt").textContent=msg;t.className="toast on"+(erro?" err":"");$("toast").querySelector(".ck").textContent=erro?"!":"✓";clearTimeout(tt);tt=setTimeout(function(){t.className="toast";},2300);}
+
+/* ===== views ===== */
+function mostrar(v){document.querySelectorAll(".view").forEach(function(x){x.classList.remove("on");});$("v-"+v).classList.add("on");window.scrollTo(0,0);}
+function irAuth(m){pararHero();mostrar("auth");setModo(m);limparMsg();}
+function voltarSite(){mostrar("landing");iniciarHero();}
+function setModo(m){
+  modoAuth=m;
+  $("tab-entrar").classList.toggle("on",m==="entrar");
+  $("tab-cadastrar").classList.toggle("on",m==="cadastrar");
+  $("campo-loja").style.display=m==="cadastrar"?"block":"none";
+  $("au-tit").textContent=m==="entrar"?"Bom te ver de volta":"Crie sua loja em 1 minuto";
+  $("au-p").textContent=m==="entrar"?"Entre pra acessar sua loja.":"Sem cartão, sem mensalidade. Comece a vender hoje.";
+  $("au-btn").textContent=m==="entrar"?"Entrar":"Criar minha loja";
+  $("in-senha").setAttribute("autocomplete",m==="entrar"?"current-password":"new-password");
+}
+var modoAuth="entrar";
+function limparMsg(){$("au-msg").className="au-msg";$("au-msg").textContent="";}
+function msgErro(t){$("au-msg").className="au-msg erro";$("au-msg").textContent=t;}
+function msgOk(t){$("au-msg").className="au-msg ok";$("au-msg").textContent=t;}
+function btnAuthLoad(on){var b=$("au-btn");if(on){b.disabled=true;b.innerHTML='<span class="spin"></span>';}else{b.disabled=false;setModo(modoAuth);}}
+
+/* ===== AUTH ===== */
+function traduz(m){m=(m||"").toLowerCase();
+  if(m.indexOf("invalid login")>=0||m.indexOf("invalid credentials")>=0)return "E-mail ou senha incorretos.";
+  if(m.indexOf("already registered")>=0||m.indexOf("already exists")>=0||m.indexOf("user already")>=0)return "Esse e-mail já tem conta. Tente entrar.";
+  if(m.indexOf("email not confirmed")>=0)return "Confirme seu e-mail pelo link que enviamos e entre.";
+  if(m.indexOf("rate limit")>=0||m.indexOf("too many")>=0)return "Muitas tentativas. Espera um pouco.";
+  if(m.indexOf("password")>=0)return "Senha fraca. Use 6 caracteres ou mais.";
+  return "Algo deu errado. Tenta de novo.";
+}
+async function fazerAuth(){
+  limparMsg();
+  var email=$("in-email").value.trim(), senha=$("in-senha").value;
+  if(!email||email.indexOf("@")<0){msgErro("Digite um e-mail válido.");return;}
+  if(senha.length<6){msgErro("A senha precisa ter ao menos 6 caracteres.");return;}
+  btnAuthLoad(true);
+  try{
+    if(modoAuth==="cadastrar"){
+      var nomeLoja=$("in-loja").value.trim();
+      if(!nomeLoja){msgErro("Dê um nome pra sua loja.");btnAuthLoad(false);return;}
+      var r=await sb.auth.signUp({email:email,password:senha,options:{data:{nome_loja:nomeLoja}}});
+      if(r.error)throw r.error;
+      if(r.data.session){await carregarApp(r.data.session.user);mostrar("app");irApp("inicio");}
+      else{msgOk("Conta criada! Confirme pelo link no seu e-mail e depois entre.");btnAuthLoad(false);setModo("entrar");}
+    }else{
+      var r2=await sb.auth.signInWithPassword({email:email,password:senha});
+      if(r2.error)throw r2.error;
+      await carregarApp(r2.data.session.user);mostrar("app");irApp("inicio");
+    }
+  }catch(err){msgErro(traduz(err&&err.message));btnAuthLoad(false);}
+}
+async function sair(){await sb.auth.signOut();uid=null;loja=null;pecas=[];pedidos=[];voltarSite();}
+
+/* ===== carregar dados ===== */
+async function carregarApp(user){
+  uid=user.id;
+  var rl=await sb.from("lojas").select("*").eq("dono_id",uid).maybeSingle();
+  loja=rl.data;
+  if(!loja){ // fallback raro: cria loja se o trigger não tiver criado
+    var slug="loja-"+uid.slice(0,8);
+    var ins=await sb.from("lojas").insert({dono_id:uid,nome:"Minha Loja",slug:slug,inicial:"M"}).select().single();
+    loja=ins.data;
+  }
+  var rp=await sb.from("pecas").select("*").eq("dono_id",uid).order("criada_em",{ascending:true});
+  pecas=rp.data||[];
+  var ro=await sb.from("pedidos").select("*").eq("dono_id",uid).order("criado_em",{ascending:false});
+  pedidos=ro.data||[];
+  renderTudo();
+}
+function renderTudo(){renderPerfil();renderKPIs();renderChart();renderInicioPedidos();renderProdutos();renderPedidos();renderConta();}
+
+function renderPerfil(){
+  $("sp-av").textContent=loja.inicial||iniDe(loja.nome);$("sp-nome").textContent=loja.nome;$("sp-slug").textContent="@"+loja.slug;
+}
+
+/* ===== app nav ===== */
+var titulos={inicio:"Início",produtos:"Produtos",pedidos:"Pedidos",conta:"Conta"};
+function irApp(sub){
+  document.querySelectorAll(".sub").forEach(function(s){s.classList.remove("on");});
+  $("app-"+sub).classList.add("on");
+  document.querySelectorAll(".snav[data-sub]").forEach(function(n){n.classList.toggle("on",n.dataset.sub===sub);});
+  $("app-titulo").textContent=titulos[sub]||"";window.scrollTo(0,0);
+}
+
+/* ===== KPIs / chart ===== */
+function ehHoje(iso){var d=new Date(iso),h=new Date();return d.getFullYear()===h.getFullYear()&&d.getMonth()===h.getMonth()&&d.getDate()===h.getDate();}
+function renderKPIs(){
+  var vendidoHoje=0,pendN=0,pendV=0,enviar=0,vendas=0;
+  pedidos.forEach(function(p){
+    var pago=(p.status==="pago"||p.status==="enviado");
+    if(pago){vendas++;if(ehHoje(p.criado_em))vendidoHoje+=Number(p.preco);}
+    if(p.status==="pendente"){pendN++;pendV+=Number(p.preco);}
+    if(p.status==="pago")enviar++;
+  });
+  $("kpi-vendido").innerHTML=vendidoHoje>=1000?'<small>R$</small> '+Number(vendidoHoje).toLocaleString("pt-BR",{maximumFractionDigits:0}):rsk(vendidoHoje);
+  $("kpi-pend").textContent=pendN;
+  $("kpi-pend-sub").textContent=pendV>0?rsk(pendV)+" em aberto":"";
+  $("kpi-enviar").textContent=enviar;
+  $("kpi-vendas").textContent=vendas;
+}
+function renderChart(){
+  var dias=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"], hoje=new Date();
+  var buckets=[],total=0;
+  for(var i=6;i>=0;i--){var d=new Date(hoje);d.setDate(hoje.getDate()-i);d.setHours(0,0,0,0);buckets.push({d:d,lbl:i===0?"Hoje":dias[d.getDay()],v:0});}
+  pedidos.forEach(function(p){if(p.status!=="pago"&&p.status!=="enviado")return;var pd=new Date(p.criado_em);pd.setHours(0,0,0,0);buckets.forEach(function(b){if(b.d.getTime()===pd.getTime()){b.v+=Number(p.preco);total+=Number(p.preco);}});});
+  var max=Math.max.apply(null,buckets.map(function(b){return b.v;}).concat([1]));
+  var html="";buckets.forEach(function(b,i){var h=Math.round((b.v/max)*100);html+='<div class="bar-wrap"><div class="bar'+(i===6?" hoje":"")+'" style="height:'+(b.v>0?Math.max(h,6):2)+'%"></div><span class="bar-lbl">'+b.lbl+'</span></div>';});
+  $("chart").innerHTML=html;
+  $("chart-total").textContent=total>0?rsk(total)+" no total":"sem vendas ainda";
+}
+
+/* ===== render pedidos ===== */
+function pillDe(s){var m={pendente:["pill-pend","Pendente"],pago:["pill-pago","Pago"],enviado:["pill-env","Enviado"],expirado:["pill-exp","Expirado"]};var x=m[s]||["pill-pend",s];return '<span class="pill '+x[0]+'">'+x[1]+'</span>';}
+function acoesPedido(p){
+  if(p.status==="pendente")return '<button class="tbtn tbtn-whats" onclick="cobrar(\''+p.id+'\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.2-1.4A10 10 0 1 0 12 2z"/></svg>Cobrar</button><button class="tbtn tbtn-esc" onclick="marcar(\''+p.id+'\',\'pago\')">Marcar pago</button><button class="tbtn tbtn-x" onclick="cancelarPedido(\''+p.id+'\')" title="Cancelar">✕</button>';
+  if(p.status==="pago")return '<button class="tbtn tbtn-esc" onclick="marcar(\''+p.id+'\',\'enviado\')">Marcar enviado</button>';
+  if(p.status==="enviado")return '<span style="font-size:13px;color:var(--cinza)">concluído</span>';
+  return '';
+}
+function linhaPedido(p,quando){
+  var thumb=fotoOu({foto_url:p.foto_url,cod:p.peca_cod,nome:p.peca_nome});
+  return '<tr><td><div class="td-cli"><img class="thumb" alt="" src="'+thumb+'"><div><div class="nm">'+esc(p.cliente_nome)+'</div>'+(quando?'<div class="pr">'+quando+'</div>':'')+'</div></div></td><td>'+esc(p.peca_nome)+' · '+esc(p.peca_cod)+'</td><td class="td-val">'+rs(p.preco)+'</td><td>'+pillDe(p.status)+'</td><td style="text-align:right">'+acoesPedido(p)+'</td></tr>';
+}
+function quandoTxt(iso){var d=new Date(iso),now=new Date(),diff=(now-d)/60000;if(diff<1)return "agora";if(diff<60)return "há "+Math.floor(diff)+" min";if(ehHoje(iso))return "hoje "+d.getHours()+":"+("0"+d.getMinutes()).slice(-2);return d.getDate()+"/"+(d.getMonth()+1);}
+function renderInicioPedidos(){
+  if(!pedidos.length){$("inicio-pedidos").innerHTML='<div class="empty" style="padding:30px 20px"><p style="margin:0">Seus pedidos vão aparecer aqui assim que a primeira venda fechar.</p></div>';return;}
+  var rows=pedidos.slice(0,5).map(function(p){return linhaPedido(p,quandoTxt(p.criado_em));}).join("");
+  $("inicio-pedidos").innerHTML='<table class="tabela"><thead><tr><th>Cliente</th><th>Peça</th><th>Valor</th><th>Status</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+var filtroPed="todos";
+function renderPedidos(){
+  var lista=pedidos.filter(function(p){return filtroPed==="todos"?true:p.status===filtroPed;});
+  if(!lista.length){
+    $("ped-area").innerHTML='<div class="empty"><div class="ei"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6"/></svg></div><h3>Nenhum pedido aqui</h3><p>As reservas e vendas das suas lives vão aparecer nesta lista.</p><button class="btn btn-pri" onclick="abrirLive()">Começar uma live</button></div>';return;
+  }
+  var rows=lista.map(function(p){return linhaPedido(p,quandoTxt(p.criado_em));}).join("");
+  $("ped-area").innerHTML='<div class="painel" style="padding:14px 10px"><table class="tabela"><thead><tr><th>Cliente</th><th>Peça</th><th>Valor</th><th>Status</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+
+/* ===== render produtos ===== */
+var filtroProd="todas";
+function renderProdutos(){
+  var lista=pecas.filter(function(p){if(filtroProd==="venda")return p.qtd>0;if(filtroProd==="esgotadas")return p.qtd<=0;return true;});
+  if(!pecas.length){
+    $("prod-area").innerHTML='<div class="empty"><div class="ei"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></div><h3>Cadastre sua primeira peça</h3><p>Adicione o que você vai vender ao vivo: nome, preço e quantidade. Fica salvo pra todas as lives.</p><button class="btn btn-pri" onclick="abrirModalProduto()">Adicionar produto</button></div>';return;
+  }
+  var topo="";
+  if(!ehPro()){
+    var n=pecas.length, cheio=n>=LIMITE_FREE;
+    topo='<div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:'+(cheio?"var(--ambar-bg)":"var(--branco)")+';border:1.5px solid '+(cheio?"var(--ambar)":"var(--linha)")+';border-radius:14px;padding:14px 18px;margin-bottom:18px;box-shadow:var(--sombra)"><div style="font-size:14.5px;font-weight:600">'+(cheio?"Você chegou no limite do plano grátis · ":"")+'<b>'+n+' de '+LIMITE_FREE+'</b> peças</div><button class="btn btn-pri btn-sm" onclick="abrirPro()"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 2l2.6 6.9L22 9l-5.6 4.4L18.4 21 12 16.7 5.6 21l2-7.6L2 9l7.4-.1z"/></svg>Virar Pro</button></div>';
+  }
+  if(!lista.length){$("prod-area").innerHTML=topo+'<div class="empty" style="padding:40px"><p>Nenhuma peça neste filtro.</p></div>';return;}
+  var html=topo+'<div class="grid-prod">';
+  lista.forEach(function(p){
+    var est=p.qtd>0?'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>'+p.qtd+' no estoque':'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 6 6 18M6 6l12 12"/></svg>Esgotado';
+    html+='<div class="cprod" onclick="abrirModalProduto(\''+p.id+'\')"><div style="position:relative"><img class="foto" alt="'+esc(p.nome)+'" src="'+fotoOu(p)+'"><span class="cod-tag">'+esc(p.cod)+'</span></div><div class="pb"><div class="pn">'+esc(p.nome)+'</div><div class="pr">'+rs(p.preco)+'</div><div class="est'+(p.qtd>0?'':' est-zero')+'">'+est+'</div></div></div>';
+  });
+  html+='</div>';$("prod-area").innerHTML=html;
+}
+
+/* ===== render conta ===== */
+function renderConta(){
+  $("ct-av").textContent=loja.inicial||iniDe(loja.nome);
+  $("ct-nome").textContent=loja.nome;$("ct-at").textContent="@"+loja.slug;
+  $("ct-in-nome").value=loja.nome||"";$("ct-in-bio").value=loja.bio||"";
+  $("ct-in-pix").value=loja.pix_chave||"";$("ct-in-pixnome").value=loja.pix_nome||"";$("ct-in-whats").value=loja.whats_num||"";
+  $("ct-vitrine").textContent="fechou.com/"+loja.slug;
+  renderPlanoCard();
+}
+function renderPlanoCard(){
+  var el=$("ct-plano");if(!el)return;
+  if(ehPro()){
+    var nomePlano=loja.plano==="premium"?"Premium":"Pro";
+    el.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:linear-gradient(155deg,var(--floresta),#0a3221);color:#eafff2;border-radius:var(--r);padding:20px 24px;box-shadow:var(--sombra-md)"><div style="display:flex;align-items:center;gap:13px"><div style="width:44px;height:44px;border-radius:12px;background:rgba(39,214,126,.16);color:var(--verde-vivo);display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 6.9L22 9l-5.6 4.4L18.4 21 12 16.7 5.6 21l2-7.6L2 9l7.4-.1z"/></svg></div><div><div style="font-family:\'Bricolage Grotesque\';font-weight:700;font-size:18px">Plano '+nomePlano+' ativo</div><div style="font-size:13.5px;color:#9fd9ba">Catálogo ilimitado e recursos liberados</div></div></div></div>';
+  }else{
+    el.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--branco);border:1.5px solid var(--linha);border-radius:var(--r);padding:20px 24px;box-shadow:var(--sombra)"><div><div style="font-family:\'Bricolage Grotesque\';font-weight:700;font-size:18px">Plano Grátis</div><div style="font-size:13.5px;color:var(--cinza);margin-top:2px">'+pecas.length+' de '+LIMITE_FREE+' peças usadas · taxa 2,49% Pix e 2% cartão</div></div><button class="btn btn-pri btn-sm" onclick="abrirPro()"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 2l2.6 6.9L22 9l-5.6 4.4L18.4 21 12 16.7 5.6 21l2-7.6L2 9l7.4-.1z"/></svg>Conhecer o Pro</button></div>';
+  }
+}
+function abrirPro(){$("modal-pro").classList.add("on");}
+function fecharPro(){$("modal-pro").classList.remove("on");}
+function assinarPro(){fecharPro();toast("Pagamento por cartão tá sendo finalizado. Já já você assina direto por aqui!");}
+async function salvarLoja(){
+  var nome=$("ct-in-nome").value.trim(),bio=$("ct-in-bio").value.trim();
+  if(!nome){toast("A loja precisa de um nome",true);return;}
+  var up=await sb.from("lojas").update({nome:nome,bio:bio||null,inicial:iniDe(nome)}).eq("id",loja.id);
+  if(up.error){toast("Não consegui salvar",true);return;}
+  loja.nome=nome;loja.bio=bio;loja.inicial=iniDe(nome);renderPerfil();renderConta();toast("Dados salvos");
+}
+async function salvarPagamento(){
+  var pix=$("ct-in-pix").value.trim(),pixnome=$("ct-in-pixnome").value.trim(),whats=$("ct-in-whats").value.trim();
+  var up=await sb.from("lojas").update({pix_chave:pix||null,pix_nome:pixnome||null,whats_num:whats||null}).eq("id",loja.id);
+  if(up.error){toast("Não consegui salvar",true);return;}
+  loja.pix_chave=pix;loja.pix_nome=pixnome;loja.whats_num=whats;toast("Pagamento salvo");
+}
+function copiarVitrine(){var t="fechou.com/"+loja.slug;if(navigator.clipboard){navigator.clipboard.writeText(t);}toast("Link copiado");}
+
+/* ===== plano ===== */
+var LIMITE_FREE=7;
+function ehPro(){return loja&&(loja.plano==="pro"||loja.plano==="premium");}
+
+/* ===== produto modal ===== */
+var editandoId=null;
+function abrirModalProduto(id){
+  if(!id && !ehPro() && pecas.length>=LIMITE_FREE){abrirPro();return;}
+  editandoId=id||null;
+  if(editandoId){
+    var p=pecas.find(function(x){return x.id===editandoId;});
+    $("mp-tit").textContent="Editar "+p.cod;
+    $("mp-nome").value=p.nome;$("mp-preco").value=p.preco;$("mp-qtd").value=p.qtd;$("mp-foto").value=p.foto_url||"";
+    $("mp-del").style.display="block";
+  }else{
+    $("mp-tit").textContent="Novo produto";
+    $("mp-nome").value="";$("mp-preco").value="";$("mp-qtd").value="1";$("mp-foto").value="";
+    $("mp-del").style.display="none";
+  }
+  $("modal-produto").classList.add("on");setTimeout(function(){$("mp-nome").focus();},50);
+}
+function fecharModalProduto(){$("modal-produto").classList.remove("on");editandoId=null;}
+async function salvarProduto(){
+  var nome=$("mp-nome").value.trim(),preco=parseFloat($("mp-preco").value),qtd=parseInt($("mp-qtd").value,10),foto=$("mp-foto").value.trim();
+  if(!editandoId && !ehPro() && pecas.length>=LIMITE_FREE){fecharModalProduto();abrirPro();return;}
+  if(!nome){toast("Dê um nome pra peça",true);return;}
+  if(isNaN(preco)||preco<0){toast("Coloque um preço válido",true);return;}
+  if(isNaN(qtd)||qtd<0)qtd=0;
+  var b=$("mp-salvar");b.disabled=true;b.innerHTML='<span class="spin"></span>';
+  try{
+    if(editandoId){
+      var up=await sb.from("pecas").update({nome:nome,preco:preco,qtd:qtd,foto_url:foto||null}).eq("id",editandoId).select().single();
+      if(up.error)throw up.error;
+      var idx=pecas.findIndex(function(x){return x.id===editandoId;});pecas[idx]=up.data;
+      toast("Peça atualizada");
+    }else{
+      var cod="P"+(loja.prox_cod||1);
+      var ins=await sb.from("pecas").insert({loja_id:loja.id,dono_id:uid,cod:cod,nome:nome,preco:preco,qtd:qtd,foto_url:foto||null}).select().single();
+      if(ins.error)throw ins.error;
+      pecas.push(ins.data);
+      await sb.from("lojas").update({prox_cod:(loja.prox_cod||1)+1}).eq("id",loja.id);
+      loja.prox_cod=(loja.prox_cod||1)+1;
+      toast("Peça "+cod+" cadastrada");
+    }
+    fecharModalProduto();renderProdutos();
+  }catch(e){toast("Não consegui salvar a peça",true);b.disabled=false;b.textContent="Salvar";}
+}
+async function apagarProduto(){
+  if(!editandoId)return;
+  var del=await sb.from("pecas").delete().eq("id",editandoId);
+  if(del.error){toast("Não consegui apagar",true);return;}
+  pecas=pecas.filter(function(x){return x.id!==editandoId;});
+  fecharModalProduto();renderProdutos();toast("Peça apagada");
+}
+
+/* ===== pedidos: cobrar / marcar / cancelar ===== */
+function cobrar(id){
+  var p=pedidos.find(function(x){return x.id===id;});if(!p)return;
+  if(!loja.pix_chave){toast("Cadastre sua chave Pix na Conta primeiro",true);irApp("conta");return;}
+  var msg="Oi "+p.cliente_nome+"! Sua peça "+p.peca_nome+" ("+p.peca_cod+") tá reservada 💚\n"+
+    "Fica "+rs(p.preco)+".\n"+
+    "Pra garantir, é só pagar no Pix: "+loja.pix_chave+(loja.pix_nome?(" ("+loja.pix_nome+")"):"")+"\n"+
+    "Me manda o comprovante quando pagar! 🛍️";
+  window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank");
+}
+async function marcar(id,status){
+  var patch={status:status};if(status==="pago")patch.metodo="Pix";
+  var up=await sb.from("pedidos").update(patch).eq("id",id);
+  if(up.error){toast("Não consegui atualizar",true);return;}
+  var p=pedidos.find(function(x){return x.id===id;});if(p){p.status=status;if(status==="pago")p.metodo="Pix";}
+  renderKPIs();renderChart();renderInicioPedidos();renderPedidos();
+  toast(status==="pago"?"Marcado como pago 💚":"Marcado como enviado");
+}
+async function cancelarPedido(id){
+  var p=pedidos.find(function(x){return x.id===id;});if(!p)return;
+  var del=await sb.from("pedidos").delete().eq("id",id);
+  if(del.error){toast("Não consegui cancelar",true);return;}
+  // devolve ao estoque
+  var pc=pecas.find(function(x){return x.cod===p.peca_cod;});
+  if(pc){await sb.from("pecas").update({qtd:pc.qtd+1}).eq("id",pc.id);pc.qtd++;}
+  pedidos=pedidos.filter(function(x){return x.id!==id;});
+  renderKPIs();renderInicioPedidos();renderPedidos();renderProdutos();toast("Reserva cancelada");
+}
+
+/* ===== COCKPIT ===== */
+var ckTimer,ckSeg=0,ckVal=0,ckRes=0,ckIds=[];
+function preencherSelectPecas(){
+  var sel=$("ck-peca"),disp=pecas.filter(function(p){return p.qtd>0;});
+  if(!disp.length){sel.innerHTML='<option value="">Cadastre peças primeiro</option>';return;}
+  sel.innerHTML=disp.map(function(p){return '<option value="'+p.id+'">'+esc(p.cod)+' · '+esc(p.nome)+' — '+rs(p.preco)+' ('+p.qtd+')</option>';}).join("");
+}
+function abrirLive(){
+  preencherSelectPecas();
+  ckSeg=0;ckVal=0;ckRes=0;ckIds=[];
+  $("ck-valor").textContent="0";$("ck-res").textContent="0";$("ck-cron").textContent="0:00";
+  $("ck-feed").innerHTML='<div class="ck-empty">As reservas que você registrar aparecem aqui. Comente o EU QUERO da cliente: escolha a peça, digite o nome e toque em Reservar.</div>';
+  $("ck-cliente").value="";
+  $("cockpit").classList.add("on");
+  clearInterval(ckTimer);ckTimer=setInterval(function(){ckSeg++;var m=Math.floor(ckSeg/60),s=ckSeg%60;$("ck-cron").textContent=m+":"+(s<10?"0":"")+s;},1000);
+}
+function fecharLive(){
+  $("cockpit").classList.remove("on");clearInterval(ckTimer);
+  renderKPIs();renderChart();renderInicioPedidos();renderPedidos();renderProdutos();
+  if(ckRes>0)toast("Live encerrada · "+ckRes+" reservas · "+rs(ckVal));else toast("Live encerrada");
+}
+async function reservar(){
+  var pecaId=$("ck-peca").value, nome=$("ck-cliente").value.trim();
+  if(!pecaId){toast("Cadastre uma peça antes",true);return;}
+  if(!nome){toast("Digite o nome da cliente",true);$("ck-cliente").focus();return;}
+  var p=pecas.find(function(x){return x.id===pecaId;});if(!p||p.qtd<=0){toast("Essa peça esgotou",true);preencherSelectPecas();return;}
+  var fechou=Math.round(Number(p.preco)*0.0249*100)/100;
+  var pedido={loja_id:loja.id,dono_id:uid,peca_cod:p.cod,peca_nome:p.nome,preco:p.preco,foto_url:p.foto_url,
+    cliente_nome:nome,cliente_ini:iniDe(nome),cliente_cor:corDe(nome),status:"pendente",metodo:null,
+    valor_fechou:fechou,valor_loja:Math.round((Number(p.preco)-fechou)*100)/100};
+  var ins=await sb.from("pedidos").insert(pedido).select().single();
+  if(ins.error){toast("Não consegui reservar",true);return;}
+  // trava estoque
+  await sb.from("pecas").update({qtd:p.qtd-1}).eq("id",p.id);p.qtd--;
+  pedidos.unshift(ins.data);ckIds.push(ins.data.id);ckRes++;
+  $("ck-res").textContent=ckRes;
+  preencherSelectPecas();$("ck-cliente").value="";$("ck-cliente").focus();
+  addReservaFeed(ins.data);
+  toast("Reservado pra "+nome+" 💚");
+}
+function addReservaFeed(p){
+  var feed=$("ck-feed");var empty=feed.querySelector(".ck-empty");if(empty)empty.remove();
+  var card=document.createElement("div");card.className="ckres";card.dataset.id=p.id;
+  card.innerHTML='<div class="av" style="background:'+(p.cliente_cor||corDe(p.cliente_nome))+'">'+esc(p.cliente_ini||iniDe(p.cliente_nome))+'</div>'+
+    '<div class="ri"><div class="rq">'+esc(p.cliente_nome)+' quer a <b>'+esc(p.peca_cod)+'</b></div><div class="rp">'+esc(p.peca_nome)+' · '+rs(p.preco)+'</div></div>'+
+    '<div class="ck-acts"><button class="ck-cobrar">Cobrar</button><button class="ck-pago">Pago</button></div>';
+  var bC=card.querySelector(".ck-cobrar"),bP=card.querySelector(".ck-pago");
+  bC.addEventListener("click",function(){cobrar(p.id);});
+  bP.addEventListener("click",async function(){
+    if(card.classList.contains("paga"))return;
+    var up=await sb.from("pedidos").update({status:"pago",metodo:"Pix"}).eq("id",p.id);
+    if(up.error){toast("Não consegui marcar",true);return;}
+    var pp=pedidos.find(function(x){return x.id===p.id;});if(pp){pp.status="pago";pp.metodo="Pix";}
+    card.classList.add("paga");bP.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Pago';
+    ckVal+=Number(p.preco);$("ck-valor").textContent=ckVal.toLocaleString("pt-BR",{maximumFractionDigits:0});
+    toast("Pagamento confirmado 💚");
+  });
+  feed.insertBefore(card,feed.firstChild);
+}
+
+/* ===== chips ===== */
+$("prod-chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;$("prod-chips").querySelectorAll(".chip").forEach(function(c){c.classList.remove("on");});b.classList.add("on");filtroProd=b.dataset.f;renderProdutos();});
+$("ped-chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;$("ped-chips").querySelectorAll(".chip").forEach(function(c){c.classList.remove("on");});b.classList.add("on");filtroPed=b.dataset.f;renderPedidos();});
+$("in-senha").addEventListener("keydown",function(e){if(e.key==="Enter")fazerAuth();});
+$("ck-cliente").addEventListener("keydown",function(e){if(e.key==="Enter")reservar();});
+$("modal-produto").addEventListener("click",function(e){if(e.target===this)fecharModalProduto();});
+$("modal-pro").addEventListener("click",function(e){if(e.target===this)fecharPro();});
+
+/* ===== HERO landing (demo animado) ===== */
+var NOMES=[["Bianca","#e8745f"],["Renata","#5a8fd6"],["Fernanda","#c08fd0"],["Aline","#e0a93b"],["Tatiane","#5fb98a"],["Vanessa","#d67fa8"],["Gabi","#7f9fd0"],["Carol","#e09060"]];
+var PECAS=[["P3","Vestido floral G","R$ 89",89],["P8","Bolsa de palha","R$ 145",145],["P12","Brinco dourado","R$ 45",45],["P7","Saia jeans 40","R$ 79",79],["P2","Kit 3 scrunchies","R$ 35",35]];
+function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+var heroTimer,heroCron,heroVal=1290,heroRes=18,heroSeg=1394;
+function heroReserva(){var n=rnd(NOMES),p=rnd(PECAS),feed=$("hero-feed");if(!feed)return;var c=document.createElement("div");c.className="hres";c.innerHTML='<div class="av" style="background:'+n[1]+'">'+n[0].charAt(0)+'</div><div class="ri"><div class="rq">'+n[0]+' quer a <b>'+p[0]+'</b></div><div class="rp">'+p[1]+'</div></div><span class="tag">'+p[2]+'</span>';feed.insertBefore(c,feed.firstChild);heroRes++;heroVal+=p[3];$("lp-res").textContent=heroRes;$("lp-valor").textContent=heroVal.toLocaleString("pt-BR");while(feed.children.length>4)feed.removeChild(feed.lastChild);}
+function heroTick(){heroSeg++;var m=Math.floor(heroSeg/60),s=heroSeg%60;var e=$("lp-cron");if(e)e.textContent=m+":"+(s<10?"0":"")+s;}
+function iniciarHero(){var feed=$("hero-feed");if(!feed)return;feed.innerHTML="";heroVal=1290;heroRes=18;heroReserva();heroReserva();heroReserva();clearInterval(heroTimer);clearInterval(heroCron);heroTimer=setInterval(heroReserva,3000);heroCron=setInterval(heroTick,1000);}
+function pararHero(){clearInterval(heroTimer);clearInterval(heroCron);}
+function seedAuthFeed(){var feed=$("au-feed");if(!feed)return;feed.innerHTML="";for(var i=0;i<3;i++){var n=rnd(NOMES),p=rnd(PECAS);var c=document.createElement("div");c.className="hres";c.style.animation="none";c.innerHTML='<div class="av" style="background:'+n[1]+'">'+n[0].charAt(0)+'</div><div class="ri"><div class="rq">'+n[0]+' quer a <b>'+p[0]+'</b></div><div class="rp">'+p[1]+'</div></div><span class="tag">'+p[2]+'</span>';feed.appendChild(c);}}
+
+/* ===== BOOT ===== */
+(async function init(){
+  seedAuthFeed();
+  try{
+    var s=await sb.auth.getSession();
+    if(s.data.session){await carregarApp(s.data.session.user);mostrar("app");irApp("inicio");}
+    else{mostrar("landing");iniciarHero();}
+  }catch(e){mostrar("landing");iniciarHero();}
+  $("boot").style.display="none";
+})();
+
+/* expõe os handlers pro HTML (script type=module não cria globais sozinho) */
+Object.assign(window,{irAuth:irAuth,voltarSite:voltarSite,setModo:setModo,fazerAuth:fazerAuth,sair:sair,irApp:irApp,abrirLive:abrirLive,fecharLive:fecharLive,reservar:reservar,abrirModalProduto:abrirModalProduto,fecharModalProduto:fecharModalProduto,salvarProduto:salvarProduto,apagarProduto:apagarProduto,cobrar:cobrar,marcar:marcar,cancelarPedido:cancelarPedido,salvarLoja:salvarLoja,salvarPagamento:salvarPagamento,copiarVitrine:copiarVitrine,abrirPro:abrirPro,fecharPro:fecharPro,assinarPro:assinarPro});
+</script>
+</body>
+</html>
